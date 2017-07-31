@@ -1,5 +1,4 @@
-
-var scores, roundScore, activePlayer, gameState, diceRoll, winScore;
+var scores, roundScore, activePlayer, gameState, diceRoll;
 
 init();
 
@@ -31,6 +30,9 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
     if (gameState) {
         scores[activePlayer] += roundScore;
         document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+
+        var winScore = document.querySelector('.win-score').value;
+        winScore == 0 ? winScore = 100 : winScore = winScore;
 
         scores[activePlayer] >= winScore ? (
             document.querySelector('#name-' + activePlayer).textContent = 'Winner!',
@@ -67,8 +69,6 @@ function init() {
     activePlayer = 0;
     gameState = true;
     diceRoll = [0, 0];
-    winScore = document.querySelector('.win-score').value;
-    winScore == 0 ? winScore = 100 : winScore = winScore ;
 
     diceNone();
 
