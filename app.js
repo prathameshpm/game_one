@@ -1,16 +1,5 @@
-/*
-GAME RULES:
 
-- The game has 2 players, playing in rounds
-- In each turn, a player rolls a dice as many times as he whishes. Each result get added to his ROUND score
-- BUT, if the player rolls a 1, all his ROUND score gets lost. After that, it's the next player's turn
-- The player can choose to 'Hold', which means that his ROUND score gets added to his GLBAL score. After that, it's the next player's turn
-- The first player to reach 100 points on GLOBAL score wins the game
-
-*/
-
-
-var scores, roundScore, activePlayer, gameState, diceRoll;
+var scores, roundScore, activePlayer, gameState, diceRoll, winScore;
 
 init();
 
@@ -27,7 +16,6 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
             document.getElementById('current-' + activePlayer).textContent = roundScore;
             diceRoll.shift();
             diceRoll.push(dice);
-            console.log(diceRoll);
             if (diceRoll[0] == 6 && diceRoll[1] == 6) {
                 scores[activePlayer] = 0;
                 document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
@@ -44,7 +32,7 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
         scores[activePlayer] += roundScore;
         document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
 
-        scores[activePlayer] >= 100 ? (
+        scores[activePlayer] >= winScore ? (
             document.querySelector('#name-' + activePlayer).textContent = 'Winner!',
             document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner'),
             document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active'),
@@ -79,6 +67,8 @@ function init() {
     activePlayer = 0;
     gameState = true;
     diceRoll = [0, 0];
+    winScore = document.querySelector('.win-score').value;
+    winScore == 0 ? winScore = 100 : winScore = winScore ;
 
     diceNone();
 
