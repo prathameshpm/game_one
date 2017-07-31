@@ -1,25 +1,20 @@
-var scores, roundScore, activePlayer, gameState, diceRoll;
+var scores, roundScore, activePlayer, gameState;
 
 init();
 
 document.querySelector('.btn-roll').addEventListener('click', function () {
     if (gameState) {
-        var dice = Math.floor(Math.random() * 6) + 1;
+        var dice1 = Math.floor(Math.random() * 6) + 1;
+        var dice2 = Math.floor(Math.random() * 6) + 1;
 
-        var diceDOM = document.querySelector('.dice');
-        diceDOM.style.display = 'block';
-        diceDOM.src = 'dice-' + dice + '.png';
+        document.getElementById('dice-1').style.display = 'block';
+        document.getElementById('dice-2').style.display = 'block';
+        document.getElementById('dice-1').src = 'dice-' + dice1 + '.png';
+        document.getElementById('dice-2').src = 'dice-' + dice2 + '.png';
 
-        if (dice !== 1) {
-            roundScore += dice;
+        if (dice1 !== 1 && dice2 !== 1) {
+            roundScore += dice1 + dice2;
             document.getElementById('current-' + activePlayer).textContent = roundScore;
-            diceRoll.shift();
-            diceRoll.push(dice);
-            if (diceRoll[0] == 6 && diceRoll[1] == 6) {
-                scores[activePlayer] = 0;
-                document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
-                nextPlayer();
-            }
         } else {
             nextPlayer();
         }
@@ -47,7 +42,6 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
 document.querySelector('.btn-new').addEventListener('click', init);
 
 function nextPlayer() {
-    diceRoll = [0, 0];
     roundScore = 0;
     document.getElementById('current-' + activePlayer).textContent = roundScore;
 
@@ -60,7 +54,8 @@ function nextPlayer() {
 }
 
 function diceNone() {
-    document.querySelector('.dice').style.display = 'none';
+    document.getElementById('dice-1').style.display = 'none';
+    document.getElementById('dice-2').style.display = 'none';
 }
 
 function init() {
@@ -68,7 +63,6 @@ function init() {
     roundScore = 0;
     activePlayer = 0;
     gameState = true;
-    diceRoll = [0, 0];
 
     diceNone();
 

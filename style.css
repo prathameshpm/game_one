@@ -165,6 +165,9 @@ i {
     box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.10);
 }
 
+#dice-1 { top: 120px; }
+#dice-2 { top: 250px; }
+
 .winner {
     background-color: #f7f7f7;
 }
