@@ -22,12 +22,10 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
         diceDOM.style.display = 'block';
         diceDOM.src = 'dice-' + dice + '.png';
 
-        if (dice !== 1) {
-            roundScore += dice;
-            document.getElementById('current-' + activePlayer).textContent = roundScore;
-        } else {
-            nextPlayer();
-        }
+        dice !== 1 ? (
+            roundScore += dice,
+            document.getElementById('current-' + activePlayer).textContent = roundScore
+        ) : nextPlayer();
     }
 });
 
@@ -36,15 +34,13 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
         scores[activePlayer] += roundScore;
         document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
 
-        if (scores[activePlayer] >= 32) {
-            document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
-            document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
-            document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
-            diceNone();
-            gameState = false;
-        } else {
-            nextPlayer();
-        }
+        scores[activePlayer] >= 32 ? (
+            document.querySelector('#name-' + activePlayer).textContent = 'Winner!',
+            document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner'),
+            document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active'),
+            diceNone(),
+            gameState = false
+        ) : nextPlayer();
     }
 });
 
