@@ -28,7 +28,7 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
             diceRoll.shift();
             diceRoll.push(dice);
             console.log(diceRoll);
-            if (diceRoll[0] == 6 && diceRoll == 6) {
+            if (diceRoll[0] == 6 && diceRoll[1] == 6) {
                 scores[activePlayer] = 0;
                 document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
                 nextPlayer();
